@@ -225,5 +225,8 @@ def main():
 	print("\nZero Matrix")
 	print(zero_matrix([[1,2,3,4],[4,5,6,6],[0,7,8,9]]))
 
+	# String Rotation
+	print("\nString Rotation : SKIPPED")
+
 if __name__ == "__main__":
 	main()
