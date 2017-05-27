@@ -119,17 +119,71 @@ def string_compress(string1):
 	ret += current_char + str(count)
 	return ret
 
-# 1 2 3     7 4 1
-# 4 5 6		8 5 2
-# 7 8 9		9 6 3
 def rotate_matrix(matrix):
-	matrix_size = len(matrix)
-	for i in range(0, matrix_size):
-		for j in range(0, matrix_size):
-			tmp = matrix[i][j]
-			matrix[i][j] = matrix[j][matrix_size - 1 - i]
-			matrix[j][matrix_size - 1 - i] = tmp
+    size = len(matrix)
+    layer_count = size // 2
+
+    for layer in range(0, layer_count):
+        first = layer
+        last = size - first - 1
+
+        for element in range(first, last):
+            offset = element - first
+
+            top = matrix[first][element]
+            right_side = matrix[element][last]
+            bottom = matrix[last][last-offset]
+            left_side = matrix[last-offset][first]
+
+            matrix[first][element] = left_side
+            matrix[element][last] = top
+            matrix[last][last-offset] = right_side
+            matrix[last-offset][first] = bottom
+    return matrix
+
+# 1 2 3 4    1 2 3 0
+# 4 5 6 0	 0 0 0 0
+# 2 7 8 9    2 7 8 0
+def zero_matrix(matrix):
+	size_row = len(matrix[0])
+	size_col = len(matrix)
+
+	first_row_has_zero = False;
+	first_col_has_zero = False;
+
+	for i in range(size_row):
+		if matrix[0][i] == 0:
+			first_row_has_zero = True
+			break
+
+	for i in range(size_col):
+		if matrix[i][0] == 0:
+			first_col_has_zero = True
+			break
+
+	for i in range(1, size_col):
+		for j in range(1, size_row):
+			if matrix[i][j] == 0:
+				matrix[i][0] = 0
+				matrix[0][j] = 0
+
+	for i in range(1, size_col):
+		if matrix[i][0] == 0:
+			nullify_row(matrix, i)
+
+	for i in range(1, size_row):
+		if matrix[0][i] == 0:
+			nullify_col(matrix, i)
+
 	return matrix
+
+def nullify_row(matrix, row):
+	for i in range (0, len(matrix[0])):
+		matrix[row][i] = 0
+
+def nullify_col(matrix, col):
+	for i in range(0, len(matrix)):
+		matrix[i][col] = 0
 
 def main():
 	# Is Unique
@@ -166,6 +220,10 @@ def main():
 	# Rotate Matrix
 	print("\nRotate Matrix")
 	print(rotate_matrix([[1,2,3],[4,5,6],[7,8,9]]))
+
+	# Zero Matrix
+	print("\nZero Matrix")
+	print(zero_matrix([[1,2,3,4],[4,5,6,6],[0,7,8,9]]))
 
 if __name__ == "__main__":
 	main()
