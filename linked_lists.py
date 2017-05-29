@@ -88,5 +88,9 @@ def main():
 	delete_middle_node(head.next.next.next)
 	print_linked_list(head)
 
+	# Partition Linked List
+	print("\n\nPartition Linked List")
+	print("PASS: no idea what the question is asking\n\n")
+
 if __name__ == "__main__":
 	main()
