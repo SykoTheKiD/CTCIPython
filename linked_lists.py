@@ -70,11 +70,26 @@ def sum_linked_list(head, head2):
 		current_head2 = current_head2.next if current_head2 != None else None
 		carry = node_sum // 10
 	return ret_sum
-# 6 1 7
-#   9 5
-# 7 1 2
-def sum_linked_list_reverse(head, head2):
-	pass
+	
+def check_palindrome(head):
+	if head == None:
+		return False
+	else:
+		slow, fast = head, head
+		stack = []
+		while fast != None and fast.next != None:
+			stack.append(slow.data)
+			slow = slow.next
+			fast = fast.next.next
+		slow = slow.next
+		while len(stack) > 0:
+			current_stack = stack.pop()
+			current_list = slow.data
+			if current_list != current_stack:
+				return False
+			slow = slow.next
+		return True
+
 
 def main():
 	# Remove duplicates in Linked List
@@ -129,12 +144,15 @@ def main():
 	head2 = LL_Node(5)
 	print_linked_list(sum_linked_list(head, head2))
 
-	# Sum Linked List (Reverse)
-	print("\nSum Linked List (Reverse)")
-	head = LL_Node(7)
-	head.next = LL_Node(1)
-	head2 = LL_Node(5)
-	# print_linked_list(sum_linked_list_reverse(head, head2))
-
+	# Palindrome
+	print("\nPalindrome\n")
+	head = LL_Node("r")
+	head.next = LL_Node("a")
+	head.next.next = LL_Node("c")
+	head.next.next.next = LL_Node("e")
+	head.next.next.next.next = LL_Node("c")
+	head.next.next.next.next.next = LL_Node("a")
+	head.next.next.next.next.next.next = LL_Node("r")
+	print(check_palindrome(head))
 if __name__ == "__main__":
 	main()
