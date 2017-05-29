@@ -70,7 +70,7 @@ def sum_linked_list(head, head2):
 		current_head2 = current_head2.next if current_head2 != None else None
 		carry = node_sum // 10
 	return ret_sum
-	
+
 def check_palindrome(head):
 	if head == None:
 		return False
@@ -90,6 +90,33 @@ def check_palindrome(head):
 			slow = slow.next
 		return True
 
+def intersection(head, head2):
+	len_head  = 0
+	head_1 = head
+	while head_1 != None:
+		len_head +=1
+		head_1 = head_1.next
+
+	len_head2 = 0
+	head_2 = head2
+	while head_2 != None:
+		len_head2 +=1
+		head_2 = head_2.next
+
+	longest = max(len_head, len_head2)
+	shortest = min(len_head, len_head2)
+	longest_list = head if len_head > len_head2 else head2
+	shortest_list = head if len_head < len_head2 else head2
+
+	for i in range(longest-shortest):
+		longest_list = longest_list.next
+
+	while longest_list != None and shortest_list != None:
+		if longest_list == shortest_list:
+			return longest_list
+		longest_list = longest_list.next
+		shortest_list = shortest_list.next
+	return None
 
 def main():
 	# Remove duplicates in Linked List
@@ -154,5 +181,20 @@ def main():
 	head.next.next.next.next.next = LL_Node("a")
 	head.next.next.next.next.next.next = LL_Node("r")
 	print(check_palindrome(head))
+
+	# Intersection
+	print("\nIntersection\n\n")
+	head = LL_Node(3)
+	head.next = LL_Node(1)
+	head.next.next = LL_Node(5)
+	head.next.next.next = LL_Node(9)
+	intersect = LL_Node(7)
+	head.next.next.next.next = intersect
+	intersect.next = LL_Node(2)
+	intersect.next.next = LL_Node(1)
+	head2 = LL_Node(4)
+	head2.next= LL_Node(6)
+	head2.next.next = intersect
+	print(intersection(head, head2))
 if __name__ == "__main__":
 	main()
