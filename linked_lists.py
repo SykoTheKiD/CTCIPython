@@ -91,18 +91,8 @@ def check_palindrome(head):
 		return True
 
 def intersection(head, head2):
-	len_head  = 0
-	head_1 = head
-	while head_1 != None:
-		len_head +=1
-		head_1 = head_1.next
-
-	len_head2 = 0
-	head_2 = head2
-	while head_2 != None:
-		len_head2 +=1
-		head_2 = head_2.next
-
+	len_head  = get_linked_list_length(head)
+	len_head2 = get_linked_list_length(head2)
 	longest = max(len_head, len_head2)
 	shortest = min(len_head, len_head2)
 	longest_list = head if len_head > len_head2 else head2
@@ -116,6 +106,23 @@ def intersection(head, head2):
 			return longest_list
 		longest_list = longest_list.next
 		shortest_list = shortest_list.next
+	return None
+
+def get_linked_list_length(head):
+	len_head  = 0
+	head_1 = head
+	while head_1 != None:
+		len_head +=1
+		head_1 = head_1.next
+	return len_head
+
+def detect_loop(head):
+	slow, fast = head, head
+	while fast != None and fast.next != None:
+		slow = slow.next
+		fast = fast.next.next
+		if fast == slow:
+			return fast
 	return None
 
 def main():
@@ -196,5 +203,15 @@ def main():
 	head2.next= LL_Node(6)
 	head2.next.next = intersect
 	print(intersection(head, head2))
+
+	# Loop Detection
+	print("Loop Detection")
+	head = LL_Node("r")
+	head.next = LL_Node("a")
+	head.next.next = LL_Node("c")
+	head.next.next.next = LL_Node("e")
+	head.next.next.next.next = LL_Node("c")
+	head.next.next.next.next.next = head.next
+	print(detect_loop(head))
 if __name__ == "__main__":
 	main()
