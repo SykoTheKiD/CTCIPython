@@ -39,10 +39,16 @@ def return_kth_last(head, k):
 	return slow
 
 def delete_middle_node(node):
-	pass
+	if node != None and node.next != None:
+		node.data = node.next.data
+		node.next = node.next.next
+		return node
+	else:
+		return None
 
 def main():
 	# Remove duplicates in Linked List
+	print("Remove duplicates in Linked List")
 	head = LL_Node(5)
 	head.next = LL_Node(5)
 	head.next.next = LL_Node(7)
@@ -56,6 +62,7 @@ def main():
 	print_linked_list(head)
 
 	# Return Kth to Last
+	print("\n\nReturn Kth to Last")
 	head = LL_Node(5)
 	head.next = LL_Node(5)
 	head.next.next = LL_Node(7)
@@ -68,6 +75,7 @@ def main():
 	print(return_kth_last(head, 3))
 
 	# Delete Middle Node
+	print("\nDelete Middle Node")
 	head = LL_Node(5)
 	head.next = LL_Node(5)
 	head.next.next = LL_Node(7)
@@ -76,10 +84,9 @@ def main():
 	head.next.next.next.next.next = LL_Node(2)
 	print("Original Linked List\n")
 	print_linked_list(head)
-	print("\n\nNode to Delete\n")
-	print(delete_middle_node(head.next.next.next))
-
-
+	print("\n\nDelete middle node\n")
+	delete_middle_node(head.next.next.next)
+	print_linked_list(head)
 
 if __name__ == "__main__":
 	main()
