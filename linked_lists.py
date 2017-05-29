@@ -45,32 +45,36 @@ def delete_middle_node(node):
 		return node
 	else:
 		return None
-# 6 1 7
-# 2 9 5
-# 9 1 2
+
 def sum_linked_list(head, head2):
-	if(head == None or head2 == None):
-		return None
-	else:
-		carry = 0
-		current_head1 = head
-		current_head2 = head2
-		ret_sum = None
-		ret_sum_ptr = None
-		while current_head1 != None and current_head2 != None:
-			node_sum = current_head1.data + current_head2.data + carry
-			to_add = node_sum % 10 if current_head1.next != None and current_head2 != None else node_sum
-			if(ret_sum):
-				ret_sum_ptr.next = LL_Node(to_add)
-				ret_sum_ptr = ret_sum_ptr.next
-			else:
-				ret_sum = LL_Node(to_add)
-				ret_sum_ptr = ret_sum
-			
-			current_head1 = current_head1.next
-			current_head2 = current_head2.next
-			carry = node_sum // 10
-		return ret_sum
+	carry = 0
+	current_head1 = head
+	current_head2 = head2
+	ret_sum = None
+	ret_sum_ptr = None
+	while current_head1 != None or current_head2 != None:
+		node_sum = carry
+		if current_head1 != None:
+			node_sum += current_head1.data
+		if current_head2 != None:
+			node_sum += current_head2.data
+		to_add = node_sum % 10 if current_head1 != None or current_head2 != None else node_sum
+		if(ret_sum):
+			ret_sum_ptr.next = LL_Node(to_add)
+			ret_sum_ptr = ret_sum_ptr.next
+		else:
+			ret_sum = LL_Node(to_add)
+			ret_sum_ptr = ret_sum
+		
+		current_head1 = current_head1.next if current_head1 != None else None
+		current_head2 = current_head2.next if current_head2 != None else None
+		carry = node_sum // 10
+	return ret_sum
+# 6 1 7
+#   9 5
+# 7 1 2
+def sum_linked_list_reverse(head, head2):
+	pass
 
 def main():
 	# Remove duplicates in Linked List
@@ -118,14 +122,19 @@ def main():
 	print("\n\nPartition Linked List")
 	print("PASS: no idea what the question is asking\n")
 
+	# Sum Linked List
 	print("\nSum Linked List")
 	head = LL_Node(7)
 	head.next = LL_Node(1)
-	head.next.next = LL_Node(6)
 	head2 = LL_Node(5)
-	head2.next = LL_Node(9)
-	head2.next.next = LL_Node(2)
 	print_linked_list(sum_linked_list(head, head2))
+
+	# Sum Linked List (Reverse)
+	print("\nSum Linked List (Reverse)")
+	head = LL_Node(7)
+	head.next = LL_Node(1)
+	head2 = LL_Node(5)
+	# print_linked_list(sum_linked_list_reverse(head, head2))
 
 if __name__ == "__main__":
 	main()
