@@ -85,6 +85,41 @@ class Stack_Object():
 	def __str__(self):
 		return str(self.data)
 
+class Stack_Of_Plates():
+	def __init__(self, stack_size = 5):
+		self.stack_size = stack_size
+		self.active_stack = []
+		self.stacks = []
+
+	def push(self, data):
+		if len(self.active_stack) < self.stack_size:
+			self.active_stack.append(data)
+		else:
+			self.stacks.append(self.active_stack)
+			self.active_stack = []
+			self.active_stack.append(data)
+
+	def pop(self):
+		value = self.active_stack.pop()
+		if len(self.active_stack) == 0:
+			self.active_stack = self.stacks.pop()
+		return value
+
+	def peek(self):
+		return self.active_stack[len(self.active_stack) - 1]
+
+	def pop_at(self, index):
+		if index == 0:
+			stack = self.active_stack
+			value = stack.pop()
+			if len(stack) == 0:
+				self.active_stack = self.stacks.pop()
+		else:
+			stack = self.stacks[index - 1]
+			value = stack.pop()
+			if len(stack) == 0:
+				self.stacks.pop(index - 1)
+
 def main():
 	# Andre 3000
 	print("Andre 3000\n\n")
@@ -110,6 +145,19 @@ def main():
 	min_stack.pop()
 	print(min_stack.peek())
 	print(min_stack.get_min())
+
+	# Stack of Plates
+	print("\nStack of Plates\n")
+	plates = Stack_Of_Plates()
+	print(len(plates.stacks))
+	plates.push(1)
+	plates.push(2)
+	plates.push(3)
+	plates.push(4)
+	plates.push(5)
+	plates.push(6)
+	print(plates.pop())
+	print(len(plates.stacks))
 
 if __name__ == "__main__":
 	main()
