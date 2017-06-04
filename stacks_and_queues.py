@@ -141,6 +141,33 @@ class Queue_With_Stacks():
 			while len(self.stack_new) > 0:
 				self.stack_old.append(self.stack_new.pop())
 
+class Stack():
+	def __init__(self):
+		self.stack = []
+
+	def push(self, data):
+		self.stack.append(data)
+
+	def pop(self):
+		return self.stack.pop()
+
+	def sort(self):
+		tmp_stack = []
+		while len(self.stack) > 0:
+			current = self.stack.pop()
+			size_tmp = len(tmp_stack)
+			if size_tmp > 0:
+				peek = tmp_stack[size_tmp - 1]
+				while current > peek and len(tmp_stack) > 0:
+					self.stack.append(tmp_stack.pop())
+				tmp_stack.append(current)
+			else:
+				tmp_stack.append(current)
+		self.stack = tmp_stack
+
+	def __str__(self):
+		return str(self.stack)
+
 def main():
 	# Andre 3000
 	print("Andre 3000\n\n")
@@ -190,6 +217,16 @@ def main():
 	print(q_with_stk.dequeue())
 
 	# Sort Stack
+	print("\nSort Stack\n")
+	stk = Stack()
+	stk.push(5)
+	stk.push(2)
+	stk.push(6)
+	stk.push(6)
+	stk.push(1)
+	stk.push(3)
+	stk.sort()
+	print(stk)
 
 if __name__ == "__main__":
 	main()
