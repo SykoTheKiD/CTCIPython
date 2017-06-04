@@ -120,6 +120,27 @@ class Stack_Of_Plates():
 			if len(stack) == 0:
 				self.stacks.pop(index - 1)
 
+class Queue_With_Stacks():
+	def __init__(self):
+		self.stack_new = []
+		self.stack_old = []
+		 
+	def dequeue(self):
+		self.flip()
+		return self.stack_old.pop()
+
+	def enqueue(self, data):
+		self.stack_new.append(data)
+
+	def peek(self):
+		self.flip()
+		return self.stack_new[len(self.stack_new) - 1]
+
+	def flip(self):
+		if len(self.stack_old) == 0:
+			while len(self.stack_new) > 0:
+				self.stack_old.append(self.stack_new.pop())
+
 def main():
 	# Andre 3000
 	print("Andre 3000\n\n")
@@ -158,6 +179,17 @@ def main():
 	plates.push(6)
 	print(plates.pop())
 	print(len(plates.stacks))
+
+	# Queue via Stacks
+	print("\nQueue via Stacks\n")
+	q_with_stk = Queue_With_Stacks()
+	q_with_stk.enqueue(5)
+	q_with_stk.enqueue(4)
+	q_with_stk.enqueue(6)
+	print(q_with_stk.dequeue())
+	print(q_with_stk.dequeue())
+
+	# Sort Stack
 
 if __name__ == "__main__":
 	main()
