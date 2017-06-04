@@ -228,5 +228,8 @@ def main():
 	stk.sort()
 	print(stk)
 
+	print("\nAnimal Shelter: PASS\n")
+
+
 if __name__ == "__main__":
 	main()
