@@ -24,12 +24,12 @@ def route_between_nodes(node1, node2):
 	return False
 
 def main():
-	Node a = Node('a')
-	Node b = Node('a')
-	Node c = Node('a')
-	Node d = Node('a')
-	Node e = Node('a')
-	Node f = Node('a')
+	a = Node('a')
+	b = Node('a')
+	c = Node('a')
+	d = Node('a')
+	e = Node('a')
+	f = Node('a')
 	a.connections.append(b)
 	b.connections.append(c)
 	c.connections.append(e)
