@@ -79,6 +79,24 @@ def print_tree(tree):
 		print_tree(tree.left)
 		print_tree(tree.right)
 
+def get_height(root):
+	if root == None:
+		return 0
+	else:
+		return 1 + max(get_height(root.left), get_height(root.right))
+
+def check_balanced(root):
+	if root == None:
+		return True
+	else:
+		left_height = get_height(root.left)
+		right_height = get_height(root.right)
+		if abs(left_height - right_height) > 1:
+			return False
+		else:
+			return check_balanced(root.left) and check_balanced(root.right)
+
+
 def main():
 	# Route between two nodes
 	print("Route between two nodes\n\n")
@@ -100,21 +118,31 @@ def main():
 	print("Minimal Tree\n")
 	arr = [1,2,3,4,5,6]
 	tree = array_to_tree(arr) 
-	# print_tree(tree)
+	print_tree(tree)
 
-	root = Binary_Node(4)
-	node1 = Binary_Node(2)
+	# List of Depths 
+	print("\nList of Depths: SKIP\n")
+
+	# Check Balanced
+	print("\nCheck Balanced\n")
+	root = Binary_Node(2)
+	node1 = Binary_Node(7)
 	node2 = Binary_Node(5)
-	node3 = Binary_Node(1)
-	node4 = Binary_Node(3)
-	node5 = Binary_Node(6)
+	node3 = Binary_Node(2)
+	node4 = Binary_Node(6)
+	node5 = Binary_Node(9)
+	node6 = Binary_Node(5)
+	node7 = Binary_Node(11)
+	node8 = Binary_Node(4)
 
 	root.left = node1
 	root.right = node2
 	root.left.left = node3
 	root.left.right = node4
 	root.right.right = node5
-
-	print("\nList of Depths: SKIP\n")
+	root.right.right.left = node8
+	root.left.right.left = node6
+	root.left.right.right = node7
+	print(get_height(root))
 if __name__ == "__main__":
 	main()
