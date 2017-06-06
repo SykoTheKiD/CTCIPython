@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3
 
 from queue import Queue
+import sys
 
 class Node():
 	def __init__(self, data):
@@ -95,6 +96,27 @@ def check_balanced(root):
 			return False
 		else:
 			return check_balanced(root.left) and check_balanced(root.right)
+
+def get_height_better(root):
+	if root == None:
+		return -1
+	else:
+		int left_height = get_height_better(root.left)
+		if left_height == -sys.maxsize:
+			return -sys.maxsize
+		int right_height = get_height_better(root.right)
+		if right_height == -sys.maxsize:
+			return -sys.maxsize
+
+		int diff = left_height - right_height
+		if abs(diff) > 1:
+			return -sys.maxsize
+		else:
+			return max(left_height, right_height) + 1
+
+def check_balanced_better(root):
+	return get_height_better(root) != -sys.maxsize
+
 
 
 def main():
