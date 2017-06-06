@@ -165,6 +165,6 @@ def main():
 	root.right.right.left = node8
 	root.left.right.left = node6
 	root.left.right.right = node7
-	print(get_height(root))
+	print(check_balanced_better(root))
 if __name__ == "__main__":
 	main()
