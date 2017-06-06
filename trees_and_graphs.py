@@ -117,7 +117,8 @@ def get_height_better(root):
 def check_balanced_better(root):
 	return get_height_better(root) != -sys.maxsize
 
-
+def validate_bst(root):
+	pass
 
 def main():
 	# Route between two nodes
@@ -166,5 +167,26 @@ def main():
 	root.left.right.left = node6
 	root.left.right.right = node7
 	print(check_balanced_better(root))
+
+	# Validate BST
+	print("Validate BST\n")
+	root = Binary_Node(27)
+	node1 = Binary_Node(14)
+	node2 = Binary_Node(35)
+	node3 = Binary_Node(10)
+	node4 = Binary_Node(19)
+	node5 = Binary_Node(42)
+	node6 = Binary_Node(31)
+
+	root.left = node1
+	root.right = node2
+	root.left.left = node3
+	root.left.right = node4
+	root.right.right = node5
+	root.right.right.left = node8
+	root.right.left = node6
+
+	print(validate_bst(root))
+
 if __name__ == "__main__":
 	main()
