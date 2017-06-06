@@ -19,6 +19,33 @@ class Binary_Node():
 	def __str__(self):
 		return str(self.data)
 
+class LL_Node():
+	def __init__(self, data):
+		self.data = data
+		self.next = None
+
+	def __str__(self):
+		return str(self.data)
+
+class Custom_Queue:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def enqueue(self, item):
+        self.items.insert(0,item)
+
+    def dequeue(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+
+    def __str__(self):
+    	return str(self.items)
+
 def route_between_nodes(node1, node2):
 	queue = Queue()
 	queue.put(node1)
@@ -73,6 +100,21 @@ def main():
 	print("Minimal Tree\n")
 	arr = [1,2,3,4,5,6]
 	tree = array_to_tree(arr) 
-	print_tree(tree)
+	# print_tree(tree)
+
+	root = Binary_Node(4)
+	node1 = Binary_Node(2)
+	node2 = Binary_Node(5)
+	node3 = Binary_Node(1)
+	node4 = Binary_Node(3)
+	node5 = Binary_Node(6)
+
+	root.left = node1
+	root.right = node2
+	root.left.left = node3
+	root.left.right = node4
+	root.right.right = node5
+
+	print("\nList of Depths: SKIP\n")
 if __name__ == "__main__":
 	main()
