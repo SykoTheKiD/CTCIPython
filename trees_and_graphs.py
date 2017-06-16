@@ -118,7 +118,16 @@ def check_balanced_better(root):
 	return get_height_better(root) != -sys.maxsize
 
 def validate_bst(root):
-	pass
+	return validate_bst_helper(root, None, None)
+
+def validate_bst_helper(root, minimum, maximum):
+	if root == None:
+		return True
+	if (minimum != None and root.data <= minimum) and (maximum != None and root.data > maximum):
+		return False
+	if not validate_bst_helper(root.left, minimum, root.data) or not validate_bst_helper(root.right, root.data, maximum)
+		return False
+	return True
 
 def main():
 	# Route between two nodes
@@ -187,6 +196,9 @@ def main():
 	root.right.left = node6
 
 	print(validate_bst(root))
+
+	# Successor
+	print("Successor\n")
 
 if __name__ == "__main__":
 	main()
