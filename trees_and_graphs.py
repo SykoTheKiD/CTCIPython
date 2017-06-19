@@ -191,6 +191,29 @@ def get_sibling(node):
 		ret = parent.right if parent.left == node else parent.left
 		return ret
 
+def contains_tree(node1, node2):
+	if node2 == None:
+		return True
+	else:
+		return sub_tree(node1, node2)
+
+def sub_tree(node1, node2):
+	if node1 == None:
+		return False
+	elif node1.data == node2.data and match_tree(node1, node2):
+		return True
+	return sub_tree(node1.left, node2) or sub_tree(node1.right, node2)
+
+def match_tree(node1, node2):
+	if node1 == None and node2 == None:
+		return True
+	elif node1 == None or node2 == None:
+		return False
+	elif node1.data != node2.data:
+		return False
+	else:
+		return match_tree(node1.left, node2.left) and match_tree(node1.right, node2.right)
+
 def main():
 	# Route between two nodes
 	print("Route between two nodes\n\n")
@@ -289,7 +312,7 @@ def main():
 
 	# First Common Ancestor
 	print("\nFirst Common Ancestor")
-		root = Binary_Node_Parent(20)
+	root = Binary_Node_Parent(20)
 	node1 = Binary_Node_Parent(8)
 	node1.parent = root
 	node2 = Binary_Node_Parent(22)
@@ -316,6 +339,8 @@ def main():
 
 	# Check Subtree
 	print("\nCheck Subtree")
+
+	print(contains_tree(node1, node2))
 
 if __name__ == "__main__":
 	main()
