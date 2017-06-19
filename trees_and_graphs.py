@@ -161,6 +161,36 @@ def left_most(node):
 			node = node.left
 		return node
 
+def first_common_ancestor(root, node1, node2):
+	if not in_subtree(root, node2) or not in_subtree(root, node1):
+		return None
+	elif in_subtree(node1, node2):
+		return node1
+	elif in_subtree(node2, node1):
+		return node2
+
+	sibling = get_sibling(node1)
+	parent = node1.parent
+	while not in_subtree(sibling, node2):
+		sibling = get_sibling(parent)
+		parent = parent.parent
+	return parent
+
+def in_subtree(node1, node2):
+	if node1 == None:
+		return False
+	if node1 == node2:
+		return True
+	return in_subtree(node1.left, node2) or in_subtree(node1.right, node2)
+
+def get_sibling(node):
+	if node == None or node.parent == None:
+		return None
+	else:
+		parent = node.parent
+		ret = parent.right if parent.left == node else parent.left
+		return ret
+
 def main():
 	# Route between two nodes
 	print("Route between two nodes\n\n")
@@ -251,11 +281,35 @@ def main():
 	node12.right = node14
 	node1.right = node12
 
-	print(in_order_successor_parent(root))
+	print(in_order_successor_parent(node10))
 
 	# Build Order
 	print("\nBuild Order")
 	print("\nSKIP: Use Topological Sort on a DAG or use DFS")
+
+	# First Common Ancestor
+	print("\nFirst Common Ancestor")
+		root = Binary_Node_Parent(20)
+	node1 = Binary_Node_Parent(8)
+	node1.parent = root
+	node2 = Binary_Node_Parent(22)
+	node2.parent = root
+
+	node4 = Binary_Node_Parent(4)
+	node4.parent = node1
+	node1.left = node4
+	node12 = Binary_Node_Parent(12)
+	node12.parent = node1
+
+	node10 = Binary_Node_Parent(10)
+	node10.parent = node12
+	node14 = Binary_Node_Parent(14)
+	node14.parent = node12
+	node12.left = node10
+	node12.right = node14
+	node1.right = node12
+
+	prtin(first_common_ancestor(node10, node14))
 
 if __name__ == "__main__":
 	main()
