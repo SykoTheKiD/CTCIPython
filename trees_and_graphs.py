@@ -253,5 +253,8 @@ def main():
 
 	print(in_order_successor_parent(root))
 
+	# Build Order
+	print("\nBuild Order")
+
 if __name__ == "__main__":
 	main()
