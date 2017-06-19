@@ -339,8 +339,8 @@ def main():
 
 	# Check Subtree
 	print("\nCheck Subtree")
-
 	print(contains_tree(node1, node2))
 
+	
 if __name__ == "__main__":
 	main()
