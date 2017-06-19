@@ -255,7 +255,7 @@ def main():
 
 	# Build Order
 	print("\nBuild Order")
-	print("\nSKIP: Use Topological Sort on a DAG")
+	print("\nSKIP: Use Topological Sort on a DAG or use DFS")
 
 if __name__ == "__main__":
 	main()
