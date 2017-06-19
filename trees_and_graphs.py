@@ -341,6 +341,8 @@ def main():
 	print("\nCheck Subtree")
 	print(contains_tree(node1, node2))
 
+	# Random Node
+	print("\nRandom Node: SKIP")
 	
 if __name__ == "__main__":
 	main()
