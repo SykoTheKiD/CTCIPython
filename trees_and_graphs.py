@@ -20,6 +20,16 @@ class Binary_Node():
 	def __str__(self):
 		return str(self.data)
 
+class Binary_Node_Parent():
+	def __init__(self, data):
+		self.data = data
+		self.left = None
+		self.right = None
+		self.parent = None
+
+	def __str__(self):
+		return str(self.data)
+
 class LL_Node():
 	def __init__(self, data):
 		self.data = data
@@ -129,6 +139,28 @@ def validate_bst_helper(root, minimum, maximum):
 		return False
 	return True
 
+def in_order_successor_parent(node):
+	if node == None:
+		return None
+	else:
+		if node.right != None:
+			return left_most(node.right)
+		else:
+			current = node
+			parent = node.parent
+			while parent != None and parent.left != current:
+				current = parent
+				parent = parent.parent
+			return parent
+
+def left_most(node):
+	if node == None:
+		return None
+	else:
+		while node.left != None:
+			node = node.left
+		return node
+
 def main():
 	# Route between two nodes
 	print("Route between two nodes\n\n")
@@ -199,6 +231,27 @@ def main():
 
 	# Successor
 	print("Successor\n")
+	root = Binary_Node_Parent(20)
+	node1 = Binary_Node_Parent(8)
+	node1.parent = root
+	node2 = Binary_Node_Parent(22)
+	node2.parent = root
+
+	node4 = Binary_Node_Parent(4)
+	node4.parent = node1
+	node1.left = node4
+	node12 = Binary_Node_Parent(12)
+	node12.parent = node1
+
+	node10 = Binary_Node_Parent(10)
+	node10.parent = node12
+	node14 = Binary_Node_Parent(14)
+	node14.parent = node12
+	node12.left = node10
+	node12.right = node14
+	node1.right = node12
+
+	print(in_order_successor_parent(root))
 
 if __name__ == "__main__":
 	main()
