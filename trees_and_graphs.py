@@ -309,7 +309,13 @@ def main():
 	node12.right = node14
 	node1.right = node12
 
-	prtin(first_common_ancestor(node10, node14))
+	print(first_common_ancestor(node10, node14))
+
+	# BST Sequence
+	print("\nBST Sequence: SKIP")
+
+	# Check Subtree
+	print("\nCheck Subtree")
 
 if __name__ == "__main__":
 	main()
